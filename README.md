@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sledge — Change Order Extraction
 
-## Getting Started
+Extract structured construction change-order data from **text-based PDFs** and plain text. Returns normalized fields, change items, per-field confidence scores, and financial validation.
 
-First, run the development server:
+**OCR is not enabled.** Scanned / image-only PDFs are rejected.
+
+## Stack
+
+- Next.js App Router API (`POST /api/extract`)
+- `unpdf` for PDF text extraction
+- OpenAI (`gpt-4o-mini` by default) for structured AI extraction
+- Zod schema + deterministic money/schedule validation
+
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env   # set OPENAI_API_KEY + APP_PASSWORD
+pnpm samples           # generate sample PDF/TXT fixtures
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) and enter the `APP_PASSWORD` passphrase.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Token-lean extraction
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Compact JSON wire format (short keys) expanded server-side
+- Short system prompt + OpenAI `json_object` response format
+- Document text capped via `EXTRACT_MAX_CHARS` (default 12k, head+tail)
+- Default model: `gpt-4o-mini`
 
-## Learn More
+## API
 
-To learn more about Next.js, take a look at the following resources:
+### Multipart upload
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+curl -X POST http://localhost:3000/api/extract \
+  -F "file=@public/samples/change-order-clean.pdf"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Raw text JSON
 
-## Deploy on Vercel
+```bash
+curl -X POST http://localhost:3000/api/extract \
+  -H "Content-Type: application/json" \
+  -d '{"text":"...","filename":"co.txt"}'
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Successful responses include `data` (structured extraction), `validation` (math checks / conflicts), and `source` metadata (`ocr_used: false`).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Samples
+
+Generated into `public/samples/`:
+
+| File | Purpose |
+|------|---------|
+| `change-order-clean.txt` / `.pdf` | Complete, consistent change order |
+| `change-order-messy.txt` | Ambiguous numbers, missing signatures |
+| `change-order-conflict.pdf` | Conflicting totals |
+| `change-order-sparse.txt` / `change-order-minimal.pdf` | Sparse documents |

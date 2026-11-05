@@ -1,0 +1,5 @@
+CHANGE REQUEST
+Project: Westbrook Parking Structure
+CR-002
+Additional waterproofing at expansion joints.
+Cost impact: $9,800

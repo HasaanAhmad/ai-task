@@ -1,0 +1,40 @@
+CONSTRUCTION CHANGE ORDER
+
+Project Name: Harborview Medical Pavilion Expansion
+Project Number: HMP-2024-118
+Change Order Number: CO-007
+Date Issued: March 14, 2025
+
+Contractor: Apex Structural Contractors LLC
+Address: 4800 Industrial Way, Suite 200, Seattle, WA 98108
+Contact: Jordan Lee, Project Manager · jlee@apexstructural.example · (206) 555-0142
+
+Client / Owner: Harborview Development Group
+Address: 900 Yesler Way, Seattle, WA 98104
+Contact: Priya Shah, Owner's Representative
+
+Original Contract Amount: $4,250,000.00
+
+Description of Requested Changes:
+1. Furnish and install additional structural steel bracing at Level 3 mechanical penthouse per RFI-44.
+2. Upgrade fireproofing thickness from 1-hour to 2-hour at columns C12–C18.
+3. Deduct unused allowance for temporary winter enclosure (partial).
+
+Reason for Change: Owner-directed design revision following AHJ review comments dated 2025-02-28.
+
+CHANGE ITEMS
+Item 1 | Addition | Structural steel bracing | Qty 1 LS | Unit Cost $48,500.00 | Amount $48,500.00
+Item 2 | Addition | Fireproofing upgrade | Qty 2,400 SF | Unit Cost $6.25 | Amount $15,000.00
+Item 3 | Deduction | Winter enclosure allowance credit | Qty 1 LS | Unit Cost $12,000.00 | Amount ($12,000.00)
+
+Additional Costs: $63,500.00
+Deductions: $12,000.00
+Net Change: $51,500.00
+Revised Contract Amount: $4,301,500.00
+
+Schedule Impact: +7 calendar days
+
+APPROVALS
+Contractor: Jordan Lee · Signed: Yes · Date: 2025-03-14
+Architect: Maya Chen, AIA · Signed: Yes · Date: 2025-03-15
+Owner: Priya Shah · Signed: Yes · Date: 2025-03-18
